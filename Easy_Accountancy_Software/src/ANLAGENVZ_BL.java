@@ -33,7 +33,7 @@ public class ANLAGENVZ_BL extends AbstractTableModel{
     public void calculate(){
         for (Anlage a : anlagen) {
             
-            a.setBis_nd(MainGUI.getYear()-a.getInbetriebnahme());
+            a.setBis_nd(ANLAGENVZ_GUI.getYear()-a.getInbetriebnahme());
             a.setBis_afa(a.getAk()/a.getNd()*a.getBis_nd());
             a.setBw(a.getAk()-a.getBis_afa());
             if(a.getBis_nd()!=a.getNd())
