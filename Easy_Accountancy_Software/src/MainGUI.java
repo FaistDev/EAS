@@ -59,7 +59,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btAnlagenVzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnlagenVzActionPerformed
         // TODO add your handling code here:
-        ANLAGENVZ_GUI anlagenvz_gui = new ANLAGENVZ_GUI();
+        //ANLAGENVZ_GUI anlagenvz_gui = new ANLAGENVZ_GUI();
     }//GEN-LAST:event_btAnlagenVzActionPerformed
 
     /**
