@@ -23,17 +23,14 @@ public class ANLAGENVZ_GUI extends javax.swing.JFrame {
         initComponents();
         this.jtTable.setModel(model);
         this.jtTable.setDefaultRenderer(Object.class, renderer);
-        int year= 2009;
-        for(int i =0; i<11;i++)
+        int year= 2019;
+        for(int i = 120; i>0 ;i--)
         {
-            year+=1;
+            
             this.cbBox.addItem(year);
+            year-=1;
         }
-        
-        this.cbBox.addItem(2016);
-        File f = new File("./anlagenverzeichnis.csv");
         year = (int) this.cbBox.getSelectedItem();
-        model.load(f);
     }
     
     
@@ -54,25 +51,19 @@ public class ANLAGENVZ_GUI extends javax.swing.JFrame {
 
         lbYear = new javax.swing.JLabel();
         cbBox = new javax.swing.JComboBox<>();
-        btUpdate = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTable = new javax.swing.JTable();
+        btAdd = new javax.swing.JButton();
+        btDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Anlagenverzeichnis");
 
-        lbYear.setText("Year:");
+        lbYear.setText("Jahr:");
 
         cbBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 onAction(evt);
-            }
-        });
-
-        btUpdate.setText("Update Table");
-        btUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                onUpdate(evt);
             }
         });
 
@@ -89,6 +80,20 @@ public class ANLAGENVZ_GUI extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtTable);
 
+        btAdd.setText("Hinzufügen");
+        btAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddActionPerformed(evt);
+            }
+        });
+
+        btDelete.setText("Löschen");
+        btDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,8 +106,10 @@ public class ANLAGENVZ_GUI extends javax.swing.JFrame {
                         .addComponent(lbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btUpdate)
+                        .addGap(84, 84, 84)
+                        .addComponent(btAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -113,10 +120,11 @@ public class ANLAGENVZ_GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btDelete))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -127,10 +135,19 @@ public class ANLAGENVZ_GUI extends javax.swing.JFrame {
         year = (int) this.cbBox.getSelectedItem();
     }//GEN-LAST:event_onAction
 
-    private void onUpdate(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onUpdate
-    {//GEN-HEADEREND:event_onUpdate
-        model.calculate();
-    }//GEN-LAST:event_onUpdate
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
+        ANLAGENVZ_AddDlg dlg = new ANLAGENVZ_AddDlg(this, true);
+        dlg.setVisible(true);
+        if(dlg.isOk()){
+            ANLAGENVZ_Anlage a = dlg.getAnlage();
+            model.add(a);
+        }
+    }//GEN-LAST:event_btAddActionPerformed
+
+    private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
+        int[] idx = jtTable.getSelectedRows();
+        model.delete(idx);
+    }//GEN-LAST:event_btDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,7 +185,8 @@ public class ANLAGENVZ_GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btUpdate;
+    private javax.swing.JButton btAdd;
+    private javax.swing.JButton btDelete;
     private javax.swing.JComboBox<Integer> cbBox;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtTable;

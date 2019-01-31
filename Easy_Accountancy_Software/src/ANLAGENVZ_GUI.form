@@ -32,8 +32,10 @@
                       <Component id="lbYear" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cbBox" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btUpdate" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                      <Component id="btAdd" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btDelete" min="-2" pref="99" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -48,11 +50,12 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbYear" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="cbBox" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="btUpdate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btAdd" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btDelete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,7 +63,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lbYear">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Year:"/>
+        <Property name="text" type="java.lang.String" value="Jahr:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbBox">
@@ -75,14 +78,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Integer&gt;"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="btUpdate">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Update Table"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onUpdate"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -105,5 +100,21 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btAdd">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hinzuf&#xfc;gen"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAddActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btDelete">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xf6;schen"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDeleteActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

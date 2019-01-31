@@ -8,9 +8,9 @@
  *
  * @author Matthias
  */
-public class Anlage {
+public class ANLAGENVZ_Anlage {
     private String bezeichnung;
-    private int ak;
+    private double aw;
     private double inbetriebnahme;
     private double nd;
     private double bis_nd;
@@ -18,26 +18,23 @@ public class Anlage {
     private double bw;
     private double afaDJ;
     private double bwEnde;
-
-    public Anlage(String bezeichnung, int ak, double inbetriebnahme, double nd, double bis_nd, double bis_afa, double bw, double afaDJ, double bwEnde) {
-        this.bezeichnung = bezeichnung;
-        this.ak = ak;
-        this.inbetriebnahme = inbetriebnahme;
-        this.nd = nd;
-        this.bis_nd = bis_nd;
-        this.bis_afa = bis_afa;
-        this.bw = bw;
-        this.afaDJ = afaDJ;
-        this.bwEnde = bwEnde;
-    }
     
-    public Anlage(String line){
+    public ANLAGENVZ_Anlage(String line){
         String[] parts = line.split(";");
         this.bezeichnung = parts[0];
-        this.ak = Integer.parseInt(parts[1].replace(".", ""));
+        this.aw = Integer.parseInt(parts[1].replace(".", ""));
         this.inbetriebnahme = Double.parseDouble(parts[2].replace(",", "."));
         this.nd = Double.parseDouble(parts[3].replace(",","."));
     }
+
+    public ANLAGENVZ_Anlage(String bezeichnung, double ak, double inbetriebnahme, double nd) {
+        this.bezeichnung = bezeichnung;
+        this.aw = ak;
+        this.inbetriebnahme = inbetriebnahme;
+        this.nd = nd;
+    }
+    
+    
 
     public double getBwEnde() {
         return bwEnde;
@@ -47,8 +44,8 @@ public class Anlage {
         return bezeichnung;
     }
 
-    public int getAk() {
-        return ak;
+    public Double getAk() {
+        return aw;
     }
 
     public double getInbetriebnahme() {

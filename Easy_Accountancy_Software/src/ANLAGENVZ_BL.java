@@ -17,8 +17,22 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ANLAGENVZ_BL extends AbstractTableModel{
 
-    private ArrayList<Anlage> anlagen = new ArrayList();
+    private ArrayList<ANLAGENVZ_Anlage> anlagen = new ArrayList();
     private static String[] COLNAMES = {"Bezeichnung","AK","Inbetriebnahme","ND","bisherige ND","AfA bisher","Wert vor AfA","AfA d. J.","BW 31.12."};
+    
+    
+    public void add(ANLAGENVZ_Anlage a){
+        anlagen.add(a);
+        calculate();
+        fireTableDataChanged();
+    }
+    
+    public void delete(int... idx){
+        for(int i=idx.length-1;i>=0;i--){
+            anlagen.remove(idx[i]);
+        }
+        fireTableDataChanged();
+    }
     
     @Override
     public int getRowCount() {
@@ -31,7 +45,7 @@ public class ANLAGENVZ_BL extends AbstractTableModel{
     }
     
     public void calculate(){
-        for (Anlage a : anlagen) {
+        for (ANLAGENVZ_Anlage a : anlagen) {
             
             a.setBis_nd(ANLAGENVZ_GUI.getYear()-a.getInbetriebnahme());
             a.setBis_afa(a.getAk()/a.getNd()*a.getBis_nd());
@@ -54,7 +68,7 @@ public class ANLAGENVZ_BL extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int i, int i1) {
-        Anlage a = anlagen.get(i);
+        ANLAGENVZ_Anlage a = anlagen.get(i);
         
         switch (i1) {
             case 0: return a.getBezeichnung();
@@ -76,7 +90,7 @@ public class ANLAGENVZ_BL extends AbstractTableModel{
             String line =reader.readLine();
             while((line = reader.readLine()) != null){
                 
-                    Anlage a = new Anlage(line);
+                    ANLAGENVZ_Anlage a = new ANLAGENVZ_Anlage(line);
                     anlagen.add(a);
                 
                 
