@@ -2,13 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group>
-            <file>file:/C:/Users/Matthias/EAS/Easy_Accountancy_Software/src/ANLAGENVZ_Renderer.java</file>
-            <file>file:/C:/Users/Matthias/EAS/Easy_Accountancy_Software/src/ANLAGENVZ_BL.java</file>
+            <file>file:/D:/Privat/Schule/SYP/Projekt/NB/EAS_LIVE/Easy_Accountancy_Software/src/Anlagen_pack/ANLAGENVZ_Renderer.java</file>
+            <file>file:/D:/Privat/Schule/SYP/Projekt/NB/EAS_LIVE/Easy_Accountancy_Software/src/Booking_pack/BOOKING_GUI.java</file>
+            <file>file:/D:/Privat/Schule/SYP/Projekt/NB/EAS_LIVE/Easy_Accountancy_Software/src/Anlagen_pack/ANLAGENVZ_GUI.java</file>
+            <file>file:/D:/Privat/Schule/SYP/Projekt/NB/EAS_LIVE/Easy_Accountancy_Software/src/Anlagen_pack/ANLAGENVZ_BL.java</file>
+            <file>file:/D:/Privat/Schule/SYP/Projekt/NB/EAS_LIVE/Easy_Accountancy_Software/src/Anlagen_pack/Anlage.java</file>
         </group>
-=======
-        <group/>
->>>>>>> Buchungen
     </open-files>
 </project-private>
