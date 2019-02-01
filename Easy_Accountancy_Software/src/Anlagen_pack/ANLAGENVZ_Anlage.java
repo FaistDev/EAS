@@ -1,5 +1,7 @@
 package Anlagen_pack;
 
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,7 +12,7 @@ package Anlagen_pack;
  *
  * @author Matthias
  */
-public class ANLAGENVZ_Anlage {
+public class ANLAGENVZ_Anlage implements Serializable {
     private String bezeichnung;
     private double aw;
     private double inbetriebnahme;
@@ -21,7 +23,7 @@ public class ANLAGENVZ_Anlage {
     private double afaDJ;
     private double bwEnde;
     
-    public ANLAGENVZ_Anlage(String line){
+    public ANLAGENVZ_Anlage(String line) {
         String[] parts = line.split(";");
         this.bezeichnung = parts[0];
         this.aw = Integer.parseInt(parts[1].replace(".", ""));

@@ -1,6 +1,5 @@
 package Anlagen_pack;
 
-
 import java.awt.Color;
 import java.awt.Component;
 import java.text.DecimalFormat;

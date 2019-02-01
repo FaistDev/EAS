@@ -1,9 +1,15 @@
 package Anlagen_pack;
 
-
+import Anlagen_pack.ANLAGENVZ_Anlage;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -18,22 +24,26 @@ import javax.swing.table.AbstractTableModel;
  * @author Matthias
  */
 public class ANLAGENVZ_BL extends AbstractTableModel{
-
+    
+    private ArrayList<ANLAGENVZ_Anlage> alleAnlagen = new ArrayList();
     private ArrayList<ANLAGENVZ_Anlage> anlagen = new ArrayList();
     private static String[] COLNAMES = {"Bezeichnung","AK","Inbetriebnahme","ND","bisherige ND","AfA bisher","Wert vor AfA","AfA d. J.","BW 31.12."};
     
-    
-    public void add(ANLAGENVZ_Anlage a){
-        anlagen.add(a);
+    public void update(){
         calculate();
         fireTableDataChanged();
     }
     
+    public void add(ANLAGENVZ_Anlage a){
+        alleAnlagen.add(a);
+        update();
+    }
+    
     public void delete(int... idx){
         for(int i=idx.length-1;i>=0;i--){
-            anlagen.remove(idx[i]);
+            alleAnlagen.remove(idx[i]);
         }
-        fireTableDataChanged();
+        update();
     }
     
     @Override
@@ -47,7 +57,8 @@ public class ANLAGENVZ_BL extends AbstractTableModel{
     }
     
     public void calculate(){
-        for (ANLAGENVZ_Anlage a : anlagen) {
+        anlagen.clear();
+        for (ANLAGENVZ_Anlage a : alleAnlagen) {
             
             a.setBis_nd(ANLAGENVZ_GUI.getYear()-a.getInbetriebnahme());
             a.setBis_afa(a.getAk()/a.getNd()*a.getBis_nd());
@@ -57,8 +68,11 @@ public class ANLAGENVZ_BL extends AbstractTableModel{
             else
                 a.setAfaDJ(a.getBw());
             a.setBwEnde(a.getBw()-a.getAfaDJ());
+            
+            if(a.getInbetriebnahme()<=ANLAGENVZ_GUI.getYear()){
+                anlagen.add(a);
+            }
         }
-        fireTableDataChanged();
     }
 
     @Override
@@ -71,6 +85,8 @@ public class ANLAGENVZ_BL extends AbstractTableModel{
     @Override
     public Object getValueAt(int i, int i1) {
         ANLAGENVZ_Anlage a = anlagen.get(i);
+        
+        
         
         switch (i1) {
             case 0: return a.getBezeichnung();
@@ -87,13 +103,13 @@ public class ANLAGENVZ_BL extends AbstractTableModel{
         }
     }
     
-    public void load(File f){
+    /*public void load(File f){
         try(BufferedReader reader = new BufferedReader(new FileReader(f))){
             String line =reader.readLine();
             while((line = reader.readLine()) != null){
                 
                     ANLAGENVZ_Anlage a = new ANLAGENVZ_Anlage(line);
-                    anlagen.add(a);
+                    alleAnlagen.add(a);
                 
                 
             }
@@ -101,6 +117,24 @@ public class ANLAGENVZ_BL extends AbstractTableModel{
         catch(Exception ex){
             ex.printStackTrace();
         }
+    }*/
+    
+    public void load(File f) throws Exception {
+        alleAnlagen.clear();
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+        Object o=null;
+        while((o=ois.readObject())!=null){
+            alleAnlagen.add((ANLAGENVZ_Anlage)o);
+        }
+    }
+    
+    public void save(File f) throws Exception {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+        for (ANLAGENVZ_Anlage a : alleAnlagen) {
+            oos.writeObject(a);
+        }
+        oos.flush();
+        oos.close();
     }
     
 }
